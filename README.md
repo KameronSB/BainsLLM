@@ -74,8 +74,8 @@ BainsLLM/
 │       └── utils/
 └── tests/
 
-#Milestones
-##Milestone 0 — Environment and ROCm
+# Milestones
+## Milestone 0 — Environment and ROCm
 
 Prove PyTorch can see and use the AMD GPU through ROCm.
 
@@ -91,46 +91,46 @@ tensors are created on cuda
 matmul runs on GPU
 backward pass works on GPU
 
-##Milestone 1 — Config System
+## Milestone 1 — Config System
 
 Create dataclass/YAML-based config loading for repeatable experiments.
 
-##Milestone 2 — Tokenizer Baseline
+## Milestone 2 — Tokenizer Baseline
 
 Implement a character-level tokenizer first.
 
-##Milestone 3 — Dataset Loader
+## Milestone 3 — Dataset Loader
 
 Create next-token prediction batches:
 
 x = tokens[t : t + block_size]
 y = tokens[t + 1 : t + block_size + 1]
 
-##Milestone 4 — Causal Self-Attention
+## Milestone 4 — Causal Self-Attention
 
 Implement scaled dot-product attention with a causal mask.
 
-##Milestone 5 — Multi-Head Attention
+## Milestone 5 — Multi-Head Attention
 
 Add multiple attention heads and output projection.
 
-##Milestone 6 — Transformer Block
+## Milestone 6 — Transformer Block
 
 Add LayerNorm, MLP, residual connections, and dropout.
 
-##Milestone 7 — Full Decoder-Only Model
+## Milestone 7 — Full Decoder-Only Model
 
 Assemble embeddings, transformer blocks, final norm, and LM head.
 
-##Milestone 8 — Training Loop
+## Milestone 8 — Training Loop
 
 Train the first tiny model and confirm the loss decreases.
 
-##Milestone 9 — Text Generation
+## Milestone 9 — Text Generation
 
 Sample from the trained model.
 
-##Milestone 10 — Architecture Experiments
+## Milestone 10 — Architecture Experiments
 
 Add and compare:
 
@@ -139,7 +139,7 @@ RoPE
 SwiGLU
 KV cache
 
-##Milestone 11 — Tokenizer Experiments
+## Milestone 11 — Tokenizer Experiments
 
 Compare:
 
