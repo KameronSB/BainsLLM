@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bainsllm"
+version = "0.1.0"
+description = "A from-scratch experimental decoder-only transformer lab in PyTorch."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Kameron Bains" }
+]
+
+dependencies = [
+  "numpy",
+  "pandas",
+  "tqdm",
+  "pyyaml",
+  "rich",
+  "matplotlib"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ipykernel",
+  "ruff",
+  "mypy"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

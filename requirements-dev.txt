@@ -1,0 +1,10 @@
+numpy
+pandas
+tqdm
+pyyaml
+rich
+matplotlib
+pytest
+ipykernel
+ruff
+mypy
