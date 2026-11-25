@@ -29,6 +29,11 @@ dev = [
   "mypy"
 ]
 
+rocm = [
+  "torch==2.9.1+rocm6.4 ; sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "pytorch-triton-rocm==3.5.1 ; sys_platform == 'linux' and platform_machine == 'x86_64'",
+]
+
 [tool.setuptools.packages.find]
 where = ["src"]
 
@@ -39,3 +44,12 @@ pythonpath = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+
+[tool.uv.sources]
+torch = { index = "pytorch-rocm" }
+pytorch-triton-rocm = { index = "pytorch-rocm" }
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm6.4"
+explicit = true
