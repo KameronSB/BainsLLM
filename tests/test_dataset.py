@@ -26,7 +26,7 @@ def test_dataset_batch_shapes() -> None:
 
 def test_dataset_targets_are_shifted_by_one() -> None:
     text = "abcdefghijklmnopqrstuvwxyz" * 10
-    dataset = TokenDataset.from_text(text, train_split=0.9)
+    dataset = TokenDataset.from_text(text, train_split=0.9, kind="char")
 
     x, y = dataset.get_batch(
         split="train",
