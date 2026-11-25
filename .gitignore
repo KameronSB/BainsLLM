@@ -9,13 +9,18 @@ __pycache__/
 # Virtual env
 .venv/
 
-# Data
-data/raw/*
-data/interim/*
-data/processed/*
-!data/raw/.gitkeep
-!data/interim/.gitkeep
-!data/processed/.gitkeep
+# Data: track the released corpus and the fitted 2k baseline tokenizer.
+/data/**
+!/data/raw/
+!/data/raw/historical_50m/
+!/data/raw/historical_50m/train.jsonl
+!/data/raw/historical_50m/validation.jsonl
+!/data/raw/historical_50m/test.jsonl
+
+!/data/processed/
+!/data/processed/historical_50m/
+!/data/processed/historical_50m/byte_bpe-2000/
+!/data/processed/historical_50m/byte_bpe-2000/tokenizer.json
 
 # Runs / checkpoints
 runs/*
