@@ -10,14 +10,13 @@ import yaml
 @dataclass(frozen=True)
 class ModelConfig:
     name: str
-    vocab_size: int | None = None
     block_size: int
     n_layers: int
     n_heads: int
     n_embd: int
     dropout: float
     use_rope: bool = False
-
+    vocab_size: int | None = None
 
 @dataclass(frozen=True)
 class TrainingConfig:
