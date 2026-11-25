@@ -7,7 +7,7 @@ from bainsllm.data.dataset import TokenDataset
 
 def test_dataset_batch_shapes() -> None:
     text = "abcdefghijklmnopqrstuvwxyz" * 10
-    dataset = TokenDataset.from_text(text, train_split=0.9)
+    dataset = TokenDataset.from_text(text, train_split=0.9, kind="char")
 
     batch_size = 4
     block_size = 8

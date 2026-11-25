@@ -1,6 +1,5 @@
 model:
   name: baseline_decoder
-  vocab_size: 65
   block_size: 128
   n_layers: 4
   n_heads: 4
@@ -17,7 +16,4 @@ training:
   grad_clip: 1.0
   device: cuda
 
-data:
-  dataset_name: tiny_shakespeare
-  tokenizer: char
-  train_split: 0.9
+data: {}

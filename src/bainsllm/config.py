@@ -10,7 +10,7 @@ import yaml
 @dataclass(frozen=True)
 class ModelConfig:
     name: str
-    vocab_size: int
+    vocab_size: int | None = None
     block_size: int
     n_layers: int
     n_heads: int
@@ -32,8 +32,9 @@ class TrainingConfig:
 
 @dataclass(frozen=True)
 class DataConfig:
-    dataset_name: str
-    tokenizer: str
+    dataset_name: str = "historical_50m"
+    tokenizer: str = "byte_bpe"
+    vocab_size: int = 2000
     train_split: float = 0.9
 
 
@@ -53,5 +54,5 @@ def load_config(path: str | Path) -> Config:
     return Config(
         model=ModelConfig(**raw["model"]),
         training=TrainingConfig(**raw["training"]),
-        data=DataConfig(**raw["data"]),
+        data=DataConfig(**(raw.get("data") or {})),
     )

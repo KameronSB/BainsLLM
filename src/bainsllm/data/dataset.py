@@ -5,40 +5,44 @@ from dataclasses import dataclass
 import torch
 
 from bainsllm.data.char_tokenizer import CharTokenizer
+from bainsllm.data.byte_bpe import ByteBPETokenizer
 
 
 @dataclass
 class TokenDataset:
     train_ids: torch.Tensor
     val_ids: torch.Tensor
-    tokenizer: CharTokenizer
+    tokenizer: CharTokenizer | ByteBPETokenizer
 
     @classmethod
     def from_text(
         cls,
         text: str,
         train_split: float = 0.9,
+        *,
+        kind: str = "byte_bpe",
+        vocab_size: int = 2000,
     ) -> "TokenDataset":
         if not 0.0 < train_split < 1.0:
-            raise ValueError("train_split must be between 0 and 1.")
+            raise ValueError("train_split must be between 0 and 1")
 
-        tokenizer = CharTokenizer.from_text(text)
-        ids = torch.tensor(tokenizer.encode(text), dtype=torch.long)
+        cut = int(len(text) * train_split)
+        if cut == 0 or cut == len(text):
+            raise ValueError("Both splits need some text")
 
-        split_idx = int(len(ids) * train_split)
+        train_text = text[:cut]
+        val_text = text[cut:]
 
-        train_ids = ids[:split_idx]
-        val_ids = ids[split_idx:]
-
-        if len(train_ids) == 0:
-            raise ValueError("Training split is empty.")
-
-        if len(val_ids) == 0:
-            raise ValueError("Validation split is empty.")
+        if kind == "byte_bpe":
+            tokenizer = ByteBPETokenizer.train([train_text], vocab_size)
+        elif kind == "char":
+            tokenizer = CharTokenizer.from_text(train_text)
+        else:
+            raise ValueError(f"Unknown tokenizer: {kind}")
 
         return cls(
-            train_ids=train_ids,
-            val_ids=val_ids,
+            train_ids=torch.tensor(tokenizer.encode(train_text), dtype=torch.long),
+            val_ids=torch.tensor(tokenizer.encode(val_text), dtype=torch.long),
             tokenizer=tokenizer,
         )
 
